@@ -21,7 +21,7 @@ namespace Solution.Api.Evolve.Controllers
             return "Digite dois valores separados pela barra";
         }
 
-        [HttpGet("{first}/{second}")]
+        [HttpGet("sum/{first}/{second}")]
         public IActionResult Sum(string first, string second)
         {
             if (IsNumeric(first) && IsNumeric(second)) {
@@ -32,6 +32,17 @@ namespace Solution.Api.Evolve.Controllers
             return BadRequest("invalid input of values");
         }
 
+        [HttpGet("subtract/{first}/{second}")]
+        public IActionResult Subtract(string first, string second)
+        {
+            if (IsNumeric(first) && IsNumeric(second))
+            {
+                var sum = ConvertToDecimal(first) - ConvertToDecimal(second);
+                return Ok(sum);
+            }
+
+            return BadRequest("invalid input of values");
+        }
 
         private Boolean IsNumeric(string num)
         {
